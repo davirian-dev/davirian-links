@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://davirian-links.vercel.app/sitemap.xml
