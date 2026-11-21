@@ -348,6 +348,19 @@
             <span>Salvar Contato na Agenda (vCard)</span>
         </button>
 
+        <!-- Banner Visual Davi Rian em Ação (Workstation & Engenharia) -->
+        <div class="w-full rounded-2xl overflow-hidden border border-slate-800 mb-8 relative group aspect-video sm:aspect-[16/10] bg-black">
+            <video autoplay loop muted playsinline preload="metadata" poster="./assets/profile.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <source src="./assets/videos/davi_dev_workstation.mp4" type="video/mp4">
+                <img src="./assets/profile.jpg" alt="Davi Rian Workstation" class="w-full h-full object-cover">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#090D16] via-transparent to-transparent pointer-events-none"></div>
+            <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs font-bold text-white pointer-events-none">
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span> Engenharia & Soluções Digitais</span>
+                <span class="text-cyan-400 font-mono text-[11px]">Davi Rian Oficial</span>
+            </div>
+        </div>
+
         <!-- Rodapé com Acesso ao Painel de Cliques -->
         <footer class="text-center text-slate-500 text-[11px] flex flex-col items-center gap-2">
             <p>© 2026 <strong>Davi Rian</strong> · Salvador, Bahia</p>
@@ -375,16 +388,30 @@
                     <p class="text-xs text-slate-400">Contabilização em tempo real</p>
                 </div>
             </div>
-            <div class="p-3 mb-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-between">
-                <span class="text-xs font-medium text-slate-300">Total de cliques registrados:</span>
-                <span id="total-clicks-counter" class="text-base font-extrabold text-indigo-400">0</span>
+            <div class="p-3 mb-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-medium text-slate-300 block">Total de cliques:</span>
+                    <span id="clicks-cloud-status" class="text-[10px] text-indigo-400 font-semibold flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
+                        <span>Nuvem Supabase Ativa</span>
+                    </span>
+                </div>
+                <span id="total-clicks-counter" class="text-xl font-extrabold text-indigo-400">0</span>
             </div>
-            <div class="space-y-2 mb-5" id="clicks-breakdown-list"></div>
+            <!-- Abas de Período -->
+            <div class="flex items-center gap-1 p-1 bg-black/40 rounded-xl border border-white/10 mb-4 text-xs font-semibold">
+                <button type="button" class="click-period-tab flex-1 py-1.5 rounded-lg text-center transition-all bg-indigo-500 text-white font-extrabold shadow" data-period="today">Hoje</button>
+                <button type="button" class="click-period-tab flex-1 py-1.5 rounded-lg text-center transition-all text-slate-400 hover:text-white" data-period="week">7 Dias</button>
+                <button type="button" class="click-period-tab flex-1 py-1.5 rounded-lg text-center transition-all text-slate-400 hover:text-white" data-period="all">Total</button>
+                <button type="button" class="click-period-tab flex-1 py-1.5 rounded-lg text-center transition-all text-slate-400 hover:text-white" data-period="local">Local</button>
+            </div>
+            <div class="space-y-2 mb-5 min-h-[140px]" id="clicks-breakdown-list"></div>
             <div class="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
-                <button type="button" id="btn-reset-clicks" class="text-[11px] text-red-400 hover:text-red-300 py-1.5 px-3 rounded-lg hover:bg-red-500/10 transition-colors">
-                    Zerar Contadores
+                <button type="button" id="btn-refresh-clicks" class="text-[11px] text-indigo-400 hover:text-indigo-300 py-1.5 px-3 rounded-lg hover:bg-indigo-500/10 transition-colors flex items-center gap-1 font-semibold">
+                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                    <span>Atualizar</span>
                 </button>
-                <div class="text-[10px] text-slate-500 text-right">Dados salvos localmente</div>
+                <div class="text-[10px] text-slate-500 text-right" id="clicks-footer-note">Sincronizado via Supabase</div>
             </div>
         </div>
     </div>
@@ -419,9 +446,18 @@
         if (counterEl) counterEl.textContent = AUDIENCE_METRICS.getTotalFormatted();
 
         // -------------------------------------------------------------
-        // Rastreamento e Painel Local de Cliques
+        // Rastreamento e Painel em Nuvem (Supabase + Local + GA4)
         // -------------------------------------------------------------
+        const SUPABASE_CONFIG = {
+            url: 'https://kpufwjvjtdakusaitsxo.supabase.co',
+            key: 'sb_publishable_7LuuHLoKdwMssSKTSptcqg_EEbu9U9l',
+            hub: 'tech'
+        };
+
         const CLICKS_STORAGE_KEY = 'davirian_tech_clicks_data';
+        let currentClickPeriod = 'today';
+        let isFetchingCloudClicks = false;
+
         const FRIENDLY_NAMES = {
             'social_github': 'GitHub Dev (Topo)',
             'social_youtube': 'YouTube Tech (Topo)',
@@ -446,33 +482,118 @@
             try { localStorage.setItem(CLICKS_STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
         }
 
+        function recordSupabaseClick(linkName) {
+            if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.key) return;
+            try {
+                fetch(`${SUPABASE_CONFIG.url}/rest/v1/link_clicks`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_CONFIG.key,
+                        'Authorization': `Bearer ${SUPABASE_CONFIG.key}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({ hub: SUPABASE_CONFIG.hub, link_name: linkName })
+                }).catch(() => {});
+            } catch(e) {}
+        }
+
         const clicksModal = document.getElementById('clicks-stats-modal');
         const btnOpenClicksStats = document.getElementById('btn-open-clicks-stats');
         const btnCloseClicksStats = document.getElementById('btn-close-clicks-stats');
-        const btnResetClicks = document.getElementById('btn-reset-clicks');
+        const btnRefreshClicks = document.getElementById('btn-refresh-clicks');
         const clicksListEl = document.getElementById('clicks-breakdown-list');
         const totalClicksCounter = document.getElementById('total-clicks-counter');
+        const clicksCloudStatus = document.getElementById('clicks-cloud-status');
+        const clicksFooterNote = document.getElementById('clicks-footer-note');
 
-        function renderClicksStats() {
-            const data = getStoredClicks();
+        async function fetchSupabaseData(period) {
+            if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.key) return null;
+            let query = `${SUPABASE_CONFIG.url}/rest/v1/link_clicks?hub=eq.${SUPABASE_CONFIG.hub}&select=link_name,created_at&order=created_at.desc&limit=2000`;
+            if (period === 'today') {
+                const startOfDay = new Date();
+                startOfDay.setHours(0, 0, 0, 0);
+                query += `&created_at=gte.${startOfDay.toISOString()}`;
+            } else if (period === 'week') {
+                const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+                query += `&created_at=gte.${sevenDaysAgo.toISOString()}`;
+            }
+            try {
+                const res = await fetch(query, {
+                    headers: { 'apikey': SUPABASE_CONFIG.key, 'Authorization': `Bearer ${SUPABASE_CONFIG.key}` }
+                });
+                if (!res.ok) return { error: true };
+                const rows = await res.json();
+                return { error: false, rows };
+            } catch(e) {
+                return { error: true };
+            }
+        }
+
+        async function renderClicksStats() {
+            if (isFetchingCloudClicks) return;
+            isFetchingCloudClicks = true;
+
+            if (currentClickPeriod === 'local') {
+                renderListItems(getStoredClicks(), false);
+                if (clicksCloudStatus) clicksCloudStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span><span class="text-slate-400">Local (Deste Dispositivo)</span>';
+                if (clicksFooterNote) clicksFooterNote.textContent = 'Salvo no navegador';
+                isFetchingCloudClicks = false;
+                return;
+            }
+
+            if (clicksListEl) {
+                clicksListEl.innerHTML = '<div class="flex items-center justify-center py-8 text-xs text-slate-400 gap-2"><div class="w-4 h-4 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin"></div><span>Buscando na nuvem...</span></div>';
+            }
+
+            const result = await fetchSupabaseData(currentClickPeriod);
+            if (!result || result.error) {
+                renderListItems(getStoredClicks(), false);
+                if (clicksCloudStatus) clicksCloudStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span><span class="text-amber-400">Aguardando tabela no Supabase (Local)</span>';
+                if (clicksFooterNote) clicksFooterNote.innerHTML = '<span class="text-amber-400">Execute o SQL no Supabase</span>';
+            } else {
+                const counts = {};
+                (result.rows || []).forEach(r => { counts[r.link_name] = (counts[r.link_name] || 0) + 1; });
+                renderListItems(counts, true);
+                if (clicksCloudStatus) clicksCloudStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span><span class="text-indigo-400">Nuvem Conectada</span>';
+                if (clicksFooterNote) clicksFooterNote.textContent = 'Tempo real via Supabase';
+            }
+            isFetchingCloudClicks = false;
+        }
+
+        function renderListItems(data, isCloud) {
             const keys = Object.keys(data);
             let total = 0;
-            if (clicksListEl) {
-                if (keys.length === 0) {
-                    clicksListEl.innerHTML = '<div class="text-center py-6 text-slate-500 text-xs">Nenhum clique registrado ainda.</div>';
-                } else {
-                    clicksListEl.innerHTML = '';
-                    keys.sort((a,b) => data[b] - data[a]).forEach(k => {
-                        const count = data[k];
-                        total += count;
-                        const row = document.createElement('div');
-                        row.className = 'flex items-center justify-between p-2.5 rounded-xl bg-white/[0.02] border border-white/5 text-xs';
-                        row.innerHTML = `<span class="text-slate-300 font-medium truncate pr-2">${FRIENDLY_NAMES[k] || k}</span><span class="font-extrabold text-indigo-400 bg-indigo-500/15 px-2 py-0.5 rounded-md text-[11px]">${count}</span>`;
-                        clicksListEl.appendChild(row);
-                    });
-                }
+            if (!clicksListEl) return;
+            if (keys.length === 0) {
+                clicksListEl.innerHTML = `<div class="text-center py-6 text-slate-500 text-xs">Nenhum clique registrado ainda.<br>${isCloud ? 'Seguidores que clicarem aparecem aqui.' : 'Clique nos botões para testar.'}</div>`;
+            } else {
+                clicksListEl.innerHTML = '';
+                keys.sort((a,b) => data[b] - data[a]).forEach(k => {
+                    const count = data[k];
+                    total += count;
+                    const row = document.createElement('div');
+                    row.className = 'flex items-center justify-between p-2.5 rounded-xl bg-white/[0.02] border border-white/5 text-xs';
+                    row.innerHTML = `<span class="text-slate-300 font-medium truncate pr-2">${FRIENDLY_NAMES[k] || k}</span><span class="font-extrabold text-indigo-400 bg-indigo-500/15 px-2.5 py-1 rounded-lg text-[11px] font-mono">${count}</span>`;
+                    clicksListEl.appendChild(row);
+                });
             }
             if (totalClicksCounter) totalClicksCounter.textContent = total;
+        }
+
+        function setupPeriodTabs() {
+            document.querySelectorAll('.click-period-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const period = tab.getAttribute('data-period');
+                    if (period === currentClickPeriod) return;
+                    currentClickPeriod = period;
+                    document.querySelectorAll('.click-period-tab').forEach(b => {
+                        b.className = 'click-period-tab flex-1 py-1.5 rounded-lg text-center transition-all text-slate-400 hover:text-white';
+                    });
+                    tab.className = 'click-period-tab flex-1 py-1.5 rounded-lg text-center transition-all bg-indigo-500 text-white font-extrabold shadow';
+                    renderClicksStats();
+                });
+            });
         }
 
         function openClicksStats() { renderClicksStats(); if (clicksModal) clicksModal.classList.remove('hidden-modal'); }
@@ -480,12 +601,8 @@
 
         if (btnOpenClicksStats) btnOpenClicksStats.addEventListener('click', openClicksStats);
         if (btnCloseClicksStats) btnCloseClicksStats.addEventListener('click', closeClicksStats);
-        if (btnResetClicks) btnResetClicks.addEventListener('click', () => {
-            if (confirm('Zerar contadores de cliques?')) {
-                localStorage.removeItem(CLICKS_STORAGE_KEY);
-                renderClicksStats();
-            }
-        });
+        if (btnRefreshClicks) btnRefreshClicks.addEventListener('click', renderClicksStats);
+        setupPeriodTabs();
 
         // Click Listener Global
         document.addEventListener('click', (e) => {
@@ -493,6 +610,18 @@
             if (!el) return;
             const name = el.getAttribute('data-track');
             recordLocalClick(name);
+            recordSupabaseClick(name);
+
+            const isSocial = name.startsWith('social_');
+            const net = isSocial ? name.replace('social_', '') : null;
+
+            if (typeof window.gtag === 'function') {
+                if (isSocial) window.gtag('event', 'click_social', { network: net, link_name: name });
+                window.gtag('event', 'select_content', { content_type: 'tech_link', item_id: name });
+                window.gtag('event', 'click_link', { link_name: name });
+            }
+            console.log(`[Tech Tracked]: ${name} (Supabase Cloud + Local)`);
+        });
 
             const isSocial = name.startsWith('social_');
             const net = isSocial ? name.replace('social_', '') : null;
