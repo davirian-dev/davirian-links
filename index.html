@@ -596,7 +596,27 @@
             });
         }
 
-        function openClicksStats() { renderClicksStats(); if (clicksModal) clicksModal.classList.remove('hidden-modal'); }
+        const ADMIN_PIN = '550901';
+
+        function checkAdminAccess() {
+            if (sessionStorage.getItem('admin_authenticated') === 'true') {
+                return true;
+            }
+            const entered = prompt('🔐 Acesso Restrito (Administrador)\nDigite sua senha para visualizar as métricas:');
+            if (entered === ADMIN_PIN) {
+                sessionStorage.setItem('admin_authenticated', 'true');
+                return true;
+            } else if (entered !== null) {
+                alert('❌ Senha incorreta!');
+            }
+            return false;
+        }
+
+        function openClicksStats() {
+            if (!checkAdminAccess()) return;
+            renderClicksStats();
+            if (clicksModal) clicksModal.classList.remove('hidden-modal');
+        }
         function closeClicksStats() { if (clicksModal) clicksModal.classList.add('hidden-modal'); }
 
         if (btnOpenClicksStats) btnOpenClicksStats.addEventListener('click', openClicksStats);
@@ -621,17 +641,6 @@
                 window.gtag('event', 'click_link', { link_name: name });
             }
             console.log(`[Tech Tracked]: ${name} (Supabase Cloud + Local)`);
-        });
-
-            const isSocial = name.startsWith('social_');
-            const net = isSocial ? name.replace('social_', '') : null;
-
-            if (typeof window.gtag === 'function') {
-                if (isSocial) window.gtag('event', 'click_social', { network: net, link_name: name });
-                window.gtag('event', 'select_content', { content_type: 'tech_link', item_id: name });
-                window.gtag('event', 'click_link', { link_name: name });
-            }
-            console.log(`[Tech Tracked]: ${name}`);
         });
 
         document.addEventListener('keydown', (e) => {
