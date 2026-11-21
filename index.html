@@ -37,104 +37,156 @@
   
   <!-- Meta Tags para SEO e Compartilhamento Social -->
   <meta name="description" content="Acesse todos os links, canais oficiais, portfólio de desenvolvimento e projetos de Davi Rian (Software Engineer & Tech Founder).">
-  <meta name="theme-color" content="#080B11">
+  <meta name="theme-color" content="#07090E">
 
+  <!-- ============================================================== -->
+  <!-- TRACKING: GOOGLE ANALYTICS 4 (GA4)                             -->
+  <!-- ============================================================== -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  -->
 
-    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        mono: ['"JetBrains Mono"', 'monospace']
-                    },
-                    colors: {
-                        dark: {
-                            bg: '#07090E',
-                            card: '#0F131D',
-                            hover: '#171D2B',
-                            border: 'rgba(255, 255, 255, 0.08)'
-                        }
-                    }
-                }
-            }
-        };
-    </script>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      tailwind.config = {
+          darkMode: 'class',
+          theme: {
+              extend: {
+                  fontFamily: {
+                      sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                      mono: ['"JetBrains Mono"', 'monospace']
+                  },
+                  colors: {
+                      dark: {
+                          bg: '#07090E',
+                          card: '#0F131D',
+                          hover: '#171D2B',
+                          border: 'rgba(255, 255, 255, 0.08)'
+                      }
+                  }
+              }
+          }
+      };
+  </script>
 
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-    <style>
-        body {
-            background-color: #07090E;
-            color: #E2E8F0;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 55%),
-                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.12) 0px, transparent 55%),
-                radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.05) 0px, transparent 60%);
-            background-attachment: fixed;
-            min-height: 100vh;
-        }
+  <style>
+      body {
+          background-color: #07090E;
+          color: #E2E8F0;
+          background-image: 
+              radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.18) 0px, transparent 55%),
+              radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.14) 0px, transparent 55%),
+              radial-gradient(at 50% 50%, rgba(16, 185, 129, 0.06) 0px, transparent 60%);
+          background-attachment: fixed;
+          min-height: 100vh;
+      }
 
-        .glass-card {
-            background: rgba(15, 19, 29, 0.85);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+      .btn-card, .glass-card {
+          background: rgba(15, 19, 29, 0.85);
+          backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
 
-        .glass-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(99, 102, 241, 0.4);
-            box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.25);
-            background: rgba(23, 29, 43, 0.95);
-        }
+      .btn-card:hover, .glass-card:hover {
+          transform: translateY(-2px);
+          border-color: rgba(99, 102, 241, 0.4);
+          box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.25);
+          background: rgba(23, 29, 43, 0.95);
+      }
 
-        .glow-avatar {
-            box-shadow: 0 0 25px 2px rgba(99, 102, 241, 0.45);
-        }
+      /* Efeito Shimmer (Brilho Tech Indigo/Ciano) */
+      @keyframes shimmer {
+          0% { transform: translateX(-160%) skewX(-20deg); }
+          35%, 100% { transform: translateX(260%) skewX(-20deg); }
+      }
+      .shimmer-card {
+          position: relative;
+          overflow: hidden;
+      }
+      .shimmer-card::after {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 50%;
+          height: 200%;
+          background: linear-gradient(
+              to right,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(99, 102, 241, 0.22) 50%,
+              rgba(255, 255, 255, 0) 100%
+          );
+          animation: shimmer 3.5s infinite ease-in-out;
+          pointer-events: none;
+      }
 
-        .pulse-online {
-            animation: pulseGlow 2s infinite;
-        }
+      .glow-avatar {
+          box-shadow: 0 0 25px 2px rgba(99, 102, 241, 0.45);
+      }
 
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.15); }
-        }
-    </style>
+      .pulse-online {
+          animation: pulseGlow 2s infinite;
+      }
 
+      @keyframes pulseGlow {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.6; transform: scale(1.15); }
+      }
+
+      .modal-backdrop {
+          transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+      }
+      .modal-backdrop.hidden-modal {
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+      }
+  </style>
 </head>
-<body class="flex flex-col items-center justify-between px-4 py-8 sm:py-12">
+<body class="flex flex-col items-center justify-between px-4 py-8 sm:py-12 min-h-screen">
 
     <!-- Container Central -->
     <main class="w-full max-w-md mx-auto flex flex-col items-center">
         
         <!-- Botões de Ação Topo (Compartilhar e QR Code) -->
-        <div class="w-full flex items-center justify-end gap-2 mb-6">
-            <button onclick="openQrModal()" class="w-10 h-10 rounded-full bg-dark-card border border-dark-border text-slate-400 hover:text-white hover:border-slate-600 flex items-center justify-center transition-all" title="Ver QR Code">
-                <i data-lucide="qr-code" class="w-4 h-4"></i>
-            </button>
-            <button onclick="shareLink()" class="w-10 h-10 rounded-full bg-dark-card border border-dark-border text-slate-400 hover:text-white hover:border-slate-600 flex items-center justify-center transition-all" title="Compartilhar Link">
-                <i data-lucide="share-2" class="w-4 h-4"></i>
-            </button>
+        <div class="w-full flex items-center justify-between mb-4">
+            <span class="text-[11px] font-mono font-bold tracking-wider text-indigo-400 bg-indigo-500/10 border border-indigo-500/30 px-3 py-1 rounded-full flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-online"></span>
+                <span>SOFTWARE ENGINEER & FOUNDER</span>
+            </span>
+
+            <div class="flex items-center gap-2">
+                <button onclick="openQrModal()" class="w-9 h-9 rounded-full bg-dark-card border border-dark-border text-slate-400 hover:text-white flex items-center justify-center transition-all" title="Ver QR Code">
+                    <i data-lucide="qr-code" class="w-4 h-4"></i>
+                </button>
+                <button onclick="shareLink()" class="w-9 h-9 rounded-full bg-dark-card border border-dark-border text-slate-400 hover:text-white flex items-center justify-center transition-all" title="Compartilhar Link">
+                    <i data-lucide="share-2" class="w-4 h-4"></i>
+                </button>
+            </div>
         </div>
 
         <!-- Perfil do Davi Rian -->
-        <div class="flex flex-col items-center text-center mb-8">
-            <div class="relative mb-4">
+        <div class="flex flex-col items-center text-center mb-3">
+            <div class="relative mb-3">
                 <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-indigo-500/80 p-1 glow-avatar bg-dark-card">
                     <img src="./assets/avatar.jpg" alt="Davi Rian" class="w-full h-full object-cover rounded-full">
                 </div>
-                <!-- Badge de Status Online -->
                 <div class="absolute bottom-1 right-2 bg-emerald-500 border-2 border-dark-bg w-4 h-4 rounded-full pulse-online" title="Disponível para novos projetos"></div>
             </div>
 
@@ -144,62 +196,73 @@
                 <svg class="w-5 h-5 text-sky-400 fill-sky-400" viewBox="0 0 24 24"><path d="m9 16.17 7.88-7.88a1.2 1.2 0 0 0-1.7-1.7L9 12.77 5.82 9.59a1.2 1.2 0 0 0-1.7 1.7l4.88 4.88Z"/></svg>
             </div>
 
-            <p class="text-xs font-mono text-indigo-400 font-semibold mb-3">@daviriann</p>
+            <p class="text-xs font-mono text-indigo-400 font-semibold mb-2">@daviriann · Tech & Automações</p>
 
-            <!-- Tagline / Bio -->
-            <div class="px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-bold mb-3 flex items-center gap-1.5">
-                <span>🚀</span>
-                <span>Software Engineer & Tech Founder</span>
-            </div>
-
-            <p class="text-xs sm:text-sm text-slate-300 max-w-xs leading-relaxed">
+            <p class="text-xs text-slate-300 max-w-xs leading-relaxed">
                 Desenvolvendo soluções digitais de alto impacto, automações com IA e ecossistema de conteúdo multiplataforma.
             </p>
         </div>
 
-        <!-- Card de Autoridade: Soma Total de Seguidores do Ecossistema Davi Rian -->
-        <div class="w-full mb-4 p-4 rounded-2xl bg-gradient-to-br from-indigo-950/70 via-dark-card to-cyan-950/40 border border-indigo-500/30 text-center shadow-lg shadow-indigo-950/30">
-            <span class="text-[10px] font-mono tracking-widest uppercase font-extrabold text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 px-2.5 py-0.5 rounded-full inline-block mb-1.5">
-                🌐 Comunidade Conectada
-            </span>
-            <div class="text-3xl font-extrabold text-white tracking-wider flex items-center justify-center gap-1.5 font-heading">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-cyan-400 to-emerald-400">+435.000</span>
-                <span class="text-xs text-slate-400 font-sans font-semibold">seguidores somados</span>
-            </div>
-            <p class="text-[11px] text-slate-400 mt-1">Soma total de audiência em tecnologia, futebol, games e mídias sociais</p>
-            
-            <div class="grid grid-cols-4 gap-1.5 mt-3 pt-3 border-t border-indigo-500/20 text-center">
-                <div class="bg-black/30 rounded-lg p-1.5">
-                    <div class="text-xs font-bold text-red-400 font-mono">+115K</div>
-                    <div class="text-[9px] text-slate-400">YouTube</div>
+        <!-- Barra Compacta de Seguidores (Média Real / Prova Social) -->
+        <div class="w-full max-w-xs mb-4">
+            <div class="flex items-center justify-between px-3.5 py-1.5 rounded-full bg-[#0F131D]/90 border border-indigo-500/30 backdrop-blur-sm shadow-md text-xs">
+                <div class="flex items-center gap-2 text-slate-300">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-400"></span>
+                    </span>
+                    <span class="text-[11px] font-medium text-slate-400">Alcance Digital:</span>
                 </div>
-                <div class="bg-black/30 rounded-lg p-1.5">
-                    <div class="text-xs font-bold text-cyan-400 font-mono">+190K</div>
-                    <div class="text-[9px] text-slate-400">TikTok</div>
-                </div>
-                <div class="bg-black/30 rounded-lg p-1.5">
-                    <div class="text-xs font-bold text-pink-400 font-mono">+80K</div>
-                    <div class="text-[9px] text-slate-400">Instagram</div>
-                </div>
-                <div class="bg-black/30 rounded-lg p-1.5">
-                    <div class="text-xs font-bold text-amber-400 font-mono">+50K</div>
-                    <div class="text-[9px] text-slate-400">Kwai</div>
+                <div class="flex items-center gap-1.5 font-bold">
+                    <span id="followers-counter" class="text-indigo-400 text-xs font-mono tracking-wide">+4.8K</span>
+                    <span class="text-[10px] text-slate-400 font-normal">conexões</span>
                 </div>
             </div>
         </div>
 
-        <!-- Bloco Principal de Destaque: Iniciar Projeto WhatsApp -->
-        <a href="https://wa.me/557196815876?text=Ol%C3%A1%20Davi!%20Acessei%20seu%20link%20oficial%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener" class="w-full p-4 mb-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-black font-extrabold text-sm sm:text-base flex items-center justify-between shadow-lg shadow-emerald-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+        <!-- Redes Sociais no Topo (Minimalistas, Curtas, Função Linktree Pro) -->
+        <div class="flex items-center justify-center gap-2.5 mb-6 w-full">
+            <!-- GitHub -->
+            <a href="https://github.com/davirian-dev" target="_blank" rel="noopener" data-track="social_github" title="GitHub (@davirian-dev)" aria-label="GitHub Oficial" class="w-11 h-11 rounded-2xl bg-[#0F131D] border border-white/10 hover:border-white/40 hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-md shadow-black/40">
+                <i data-lucide="github" class="w-5 h-5"></i>
+            </a>
+
+            <!-- YouTube Tech -->
+            <a href="https://www.youtube.com/@daviriannn" target="_blank" rel="noopener" data-track="social_youtube" title="Canal YouTube" aria-label="YouTube Tech" class="w-11 h-11 rounded-2xl bg-[#0F131D] border border-white/10 hover:border-red-500/60 hover:bg-red-500/10 text-slate-400 hover:text-red-500 flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-md shadow-black/40">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+
+            <!-- Instagram Tech -->
+            <a href="https://www.instagram.com/daviriann" target="_blank" rel="noopener" data-track="social_instagram" title="Instagram Oficial" aria-label="Instagram Oficial" class="w-11 h-11 rounded-2xl bg-[#0F131D] border border-white/10 hover:border-pink-500/60 hover:bg-pink-500/10 text-slate-400 hover:text-pink-400 flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-md shadow-black/40">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+
+            <!-- X / Twitter -->
+            <a href="https://x.com/DaviRiann" target="_blank" rel="noopener" data-track="social_twitter" title="X (Twitter)" aria-label="X Oficial" class="w-11 h-11 rounded-2xl bg-[#0F131D] border border-white/10 hover:border-sky-400/60 hover:bg-sky-500/10 text-slate-400 hover:text-sky-400 flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-md shadow-black/40">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+
+            <!-- WhatsApp Comercial -->
+            <a href="https://wa.me/557196815876?text=Ol%C3%A1%20Davi!%20Vim%20pelo%20hub%20tech." target="_blank" rel="noopener" data-track="social_whatsapp" title="WhatsApp Comercial" aria-label="WhatsApp Direto" class="w-11 h-11 rounded-2xl bg-[#0F131D] border border-white/10 hover:border-emerald-500/60 hover:bg-emerald-500/10 text-slate-400 hover:text-emerald-400 flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-md shadow-black/40">
+                <i data-lucide="message-square" class="w-5 h-5"></i>
+            </a>
+        </div>
+
+        <!-- Destaque 1: Iniciar Projeto no WhatsApp (com Shimmer) -->
+        <a href="https://wa.me/557196815876?text=Ol%C3%A1%20Davi!%20Acessei%20seu%20link%20oficial%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener" data-track="destaque_iniciar_projeto" class="btn-card shimmer-card w-full p-4 mb-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-indigo-600 text-black font-extrabold text-sm sm:text-base flex items-center justify-between shadow-lg shadow-emerald-500/20">
             <div class="flex items-center gap-3 min-w-0">
-                <div class="w-10 h-10 rounded-xl bg-black/10 flex items-center justify-center flex-shrink-0">
-                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                <div class="w-10 h-10 rounded-xl bg-black/15 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="message-square" class="w-5 h-5 text-black"></i>
                 </div>
                 <div class="text-left min-w-0">
-                    <div class="font-extrabold">Iniciar Projeto no WhatsApp</div>
-                    <div class="text-[11px] text-emerald-950 font-medium">Resposta rápida & consultoria gratuita</div>
+                    <div class="font-extrabold text-black flex items-center gap-1.5 flex-wrap">
+                        <span>Iniciar Projeto no WhatsApp</span>
+                        <span class="bg-black text-emerald-400 text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-extrabold">Online</span>
+                    </div>
+                    <div class="text-[11px] text-emerald-950 font-bold">Resposta rápida & consultoria para bots e automações</div>
                 </div>
             </div>
-            <i data-lucide="arrow-right" class="w-5 h-5 flex-shrink-0 ml-2"></i>
+            <i data-lucide="arrow-right" class="w-5 h-5 text-black flex-shrink-0 ml-2"></i>
         </a>
 
         <!-- Seção 1: Tecnologia, Portfólio & Software House -->
@@ -211,25 +274,42 @@
 
             <div class="flex flex-col gap-2.5">
 
-                <!-- Card Especial: Mega Acervo Digital Geral VIP (+68 Categorias) -->
-                <a href="https://wa.me/557196815876?text=Fala%20Davi!%20Quero%20garantir%20meu%20Acesso%20VIP%20ao%20Mega%20Acervo%20Digital%20Geral%20(68%20Categorias%20por%20R$%209,90)." target="_blank" rel="noopener" class="w-full p-4 rounded-xl glass-card flex items-center justify-between group border-2 border-indigo-500/80 bg-gradient-to-r from-indigo-950/60 via-purple-950/50 to-slate-900/70 hover:border-indigo-400 shadow-xl shadow-indigo-500/20 hover:scale-[1.01] transition-all">
+                <!-- Destaque 2: Davi Bot SaaS Studio (com Shimmer) -->
+                <a href="https://davi-bot-site.vercel.app" target="_blank" rel="noopener" data-track="link_davibot_saas" class="btn-card shimmer-card w-full p-4 rounded-xl flex items-center justify-between group border-2 border-indigo-500/80 bg-gradient-to-r from-indigo-950/60 via-purple-950/50 to-slate-900/70 hover:border-indigo-400 shadow-xl shadow-indigo-500/20">
                     <div class="flex items-center gap-3 min-w-0">
                         <div class="w-11 h-11 rounded-xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-300 group-hover:scale-110 transition-transform flex-shrink-0">
-                            <i data-lucide="folder-archive" class="w-6 h-6"></i>
+                            <i data-lucide="bot" class="w-6 h-6"></i>
                         </div>
                         <div class="text-left min-w-0">
                             <div class="text-sm font-extrabold text-white flex items-center gap-1.5 flex-wrap group-hover:text-indigo-300 transition-colors">
-                                <span>Mega Acervo Digital Geral VIP</span>
-                                <span class="bg-gradient-to-r from-emerald-500 to-teal-400 text-black text-[9px] px-2 py-0.5 rounded-full font-black uppercase tracking-wider whitespace-nowrap shrink-0">R$ 9,90 PIX</span>
+                                <span>Davi Bot · SaaS de Vídeos com IA</span>
+                                <span class="bg-gradient-to-r from-emerald-500 to-teal-400 text-black text-[9px] px-2 py-0.5 rounded-full font-black uppercase tracking-wider whitespace-nowrap shrink-0">Plataforma</span>
                             </div>
-                            <div class="text-[11px] text-indigo-200/90 font-medium">+68 Tópicos no Telegram: IAs, Softwares, Games PC, Dev, Cursos & Filmes</div>
+                            <div class="text-[11px] text-indigo-200/90 font-medium">Whisper, Capas A/B, Roteiros e Automação de Cortes Virais</div>
                         </div>
                     </div>
-                    <i data-lucide="lock" class="w-4 h-4 text-emerald-400 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
+                    <i data-lucide="arrow-up-right" class="w-5 h-5 text-indigo-400 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
+                </a>
+
+                <!-- Card Especial: Mega Acervo Digital Geral VIP (+68 Categorias) -->
+                <a href="https://wa.me/557196815876?text=Fala%20Davi!%20Quero%20garantir%20meu%20Acesso%20VIP%20ao%20Mega%20Acervo%20Digital%20Geral%20(68%20Categorias%20por%20R$%209,90)." target="_blank" rel="noopener" data-track="link_mega_acervo" class="btn-card w-full p-3.5 rounded-xl flex items-center justify-between group border-l-4 border-l-purple-500">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform flex-shrink-0">
+                            <i data-lucide="folder-archive" class="w-5 h-5"></i>
+                        </div>
+                        <div class="text-left min-w-0">
+                            <div class="text-sm font-bold text-white group-hover:text-purple-400 transition-colors flex items-center gap-1.5 flex-wrap">
+                                <span>Mega Acervo Digital Geral VIP</span>
+                                <span class="bg-purple-500 text-white text-[9px] px-1.5 py-0.5 rounded font-mono">R$ 9,90</span>
+                            </div>
+                            <div class="text-[11px] text-slate-400">+68 Tópicos no Telegram: IAs, Softwares, Games PC, Dev & Cursos</div>
+                        </div>
+                    </div>
+                    <i data-lucide="lock" class="w-4 h-4 text-purple-400 flex-shrink-0 ml-2"></i>
                 </a>
                 
                 <!-- Site Oficial Tech -->
-                <a href="https://davirian-tech.vercel.app/" target="_blank" rel="noopener" class="w-full p-3.5 rounded-xl glass-card flex items-center justify-between group">
+                <a href="https://davirian-tech.vercel.app/" target="_blank" rel="noopener" data-track="link_portfolio_tech" class="btn-card w-full p-3.5 rounded-xl flex items-center justify-between group border-l-4 border-l-indigo-500">
                     <div class="flex items-center gap-3 min-w-0">
                         <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-110 transition-transform flex-shrink-0">
                             <i data-lucide="globe" class="w-5 h-5"></i>
@@ -239,261 +319,75 @@
                             <div class="text-[11px] text-slate-400">Cases reais, serviços de bot, web e cálculo de orçamentos</div>
                         </div>
                     </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
                 </a>
 
-                <!-- Davi Bot SaaS -->
-                <a href="https://davi-bot-site.vercel.app" target="_blank" rel="noopener" class="w-full p-3.5 rounded-xl glass-card flex items-center justify-between group">
-                    <div class="flex items-center gap-3 min-w-0">
-                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform flex-shrink-0">
-                            <i data-lucide="bot" class="w-5 h-5"></i>
-                        </div>
-                        <div class="text-left min-w-0">
-                            <div class="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors">Davi Bot · SaaS de Vídeos com IA</div>
-                            <div class="text-[11px] text-slate-400">Plataforma de inteligência e cortes automatizados para criadores</div>
-                        </div>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
-                </a>
-
-                
-                <!-- Davi Bot SaaS — Painel Demo Ao Vivo -->
-                <a href="https://davi-bot-site.vercel.app/painel/" target="_blank" rel="noopener" class="w-full p-3.5 rounded-xl glass-card flex items-center justify-between group border-l-2 border-l-purple-500">
-                    <div class="flex items-center gap-3 min-w-0">
-                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform flex-shrink-0">
-                            <i data-lucide="play-circle" class="w-5 h-5"></i>
-                        </div>
-                        <div class="text-left min-w-0">
-                            <div class="text-sm font-bold text-white group-hover:text-purple-400 transition-colors flex items-center gap-1.5 flex-wrap">
-                                <span>Davi Bot · Painel Demo Ao Vivo</span>
-                                <span class="bg-purple-500 text-white text-[9px] px-1.5 py-0.5 rounded-full font-bold animate-pulse whitespace-nowrap shrink-0">DEMO</span>
-                            </div>
-                            <div class="text-[11px] text-slate-400">Teste o painel completo do SaaS com IA — login gratuito e dados de exemplo</div>
-                        </div>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
-                </a>
-
-                <!-- Bot Personalizado WhatsApp e Telegram -->
-                <a href="https://wa.me/557196815876?text=Ol%C3%A1%20Davi!%20Gostaria%20de%20um%20bot%20personalizado%20para%20o%20meu%20grupo%20no%20WhatsApp%2FTelegram." target="_blank" rel="noopener" class="w-full p-3.5 rounded-xl glass-card flex items-center justify-between group border-l-2 border-l-emerald-500">
+                <!-- Takeshi Bot Engine -->
+                <a href="https://github.com/davirian-dev/takeshi-bot" target="_blank" rel="noopener" data-track="link_takeshi_bot" class="btn-card w-full p-3.5 rounded-xl flex items-center justify-between group border-l-4 border-l-emerald-500">
                     <div class="flex items-center gap-3 min-w-0">
                         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform flex-shrink-0">
-                            <i data-lucide="bot" class="w-5 h-5"></i>
+                            <i data-lucide="terminal" class="w-5 h-5"></i>
                         </div>
                         <div class="text-left min-w-0">
-                            <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors flex items-center gap-1.5 flex-wrap">
-                                <span>Faço Bot para sua Necessidade</span>
-                                <span class="bg-emerald-500/20 text-emerald-300 text-[9px] px-1.5 py-0.5 rounded font-mono whitespace-nowrap shrink-0">WhatsApp & Telegram</span>
+                            <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+                                <span>Takeshi Bot · Engine WhatsApp</span>
+                                <span class="bg-emerald-500/20 text-emerald-300 text-[9px] px-1.5 py-0.5 rounded font-mono">Open Source</span>
                             </div>
-                            <div class="text-[11px] text-slate-400">Bots personalizados para seu grupo: triagem, vendas Pix automáticas, moderação e atendimento</div>
+                            <div class="text-[11px] text-slate-400">Automação de grupos, IA multimodal, moderação e pagamentos</div>
                         </div>
                     </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
-                </a>
-
-                <!-- Família em Foco App -->
-                <a href="https://davirian-dev.github.io/familia-em-foco/" target="_blank" rel="noopener" class="w-full p-3.5 rounded-xl glass-card flex items-center justify-between group">
-                    <div class="flex items-center gap-3 min-w-0">
-                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform flex-shrink-0">
-                            <i data-lucide="heart" class="w-5 h-5"></i>
-                        </div>
-                        <div class="text-left min-w-0">
-                            <div class="text-sm font-bold text-white group-hover:text-purple-400 transition-colors">Família em Foco · App PWA/APK</div>
-                            <div class="text-[11px] text-slate-400">Gamificação, hábitos, finanças familiares e rotina</div>
-                        </div>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
-                </a>
-
-                <!-- GitHub Oficial -->
-                <a href="https://github.com/davirian-dev" target="_blank" rel="noopener" class="w-full p-3.5 rounded-xl glass-card flex items-center justify-between group">
-                    <div class="flex items-center gap-3 min-w-0">
-                        <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-200 group-hover:scale-110 transition-transform flex-shrink-0">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                        </div>
-                        <div class="text-left min-w-0">
-                            <div class="text-sm font-bold text-white group-hover:text-slate-200 transition-colors">GitHub · @davirian-dev</div>
-                            <div class="text-[11px] text-slate-400">Código-fonte, repositórios públicos e projetos open-source</div>
-                        </div>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
-                </a>
-
-                <!-- LinkedIn -->
-                <a href="https://www.linkedin.com/in/davirian/" target="_blank" rel="noopener" class="w-full p-3.5 rounded-xl glass-card flex items-center justify-between group">
-                    <div class="flex items-center gap-3 min-w-0">
-                        <div class="w-10 h-10 rounded-xl bg-blue-600/10 border border-blue-600/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform flex-shrink-0">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                        </div>
-                        <div class="text-left min-w-0">
-                            <div class="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">LinkedIn Profissional</div>
-                            <div class="text-[11px] text-slate-400">Carreira, formação acadêmica e conexões corporativas</div>
-                        </div>
-                    </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
                 </a>
 
             </div>
-        </div>
-
-        <!-- Seção 2: Redes de Conteúdo & Comunidade -->
-        <div class="w-full mb-6">
-            <span class="text-[11px] font-bold text-slate-400 tracking-wider uppercase block mb-3 pl-1 flex items-center gap-1.5">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-pink-400"></i>
-                <span>Redes Sociais & Conteúdo</span>
-            </span>
-
-            <!-- Grid 100% Simétrico 3x2 das 6 Redes Sociais -->
-            <div class="grid grid-cols-3 gap-2.5">
-
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/daviriann" target="_blank" rel="noopener" class="p-3 rounded-xl glass-card flex flex-col items-center justify-center text-center group">
-                    <div class="w-9 h-9 rounded-xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    </div>
-                    <span class="text-xs font-bold text-white group-hover:text-pink-400 transition-colors">Instagram</span>
-                    <span class="text-[10px] text-slate-400">@daviriann</span>
-                </a>
-
-                <!-- YouTube -->
-                <a href="https://www.youtube.com/@daviriannn?sub_confirmation=1" target="_blank" rel="noopener" class="p-3 rounded-xl glass-card flex flex-col items-center justify-center text-center group" title="Inscrever-se no Canal">
-                    <div class="w-9 h-9 rounded-xl bg-red-600/10 border border-red-600/20 flex items-center justify-center text-red-500 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                    </div>
-                    <span class="text-xs font-bold text-white group-hover:text-red-400 transition-colors">YouTube</span>
-                    <span class="text-[10px] text-slate-400">@daviriannn</span>
-                </a>
-
-                <!-- TikTok -->
-                <a href="https://www.tiktok.com/@daviriann" target="_blank" rel="noopener" class="p-3 rounded-xl glass-card flex flex-col items-center justify-center text-center group">
-                    <div class="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0">
-                        <svg class="w-5 h-5 fill-cyan-400" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.34 6.34 0 0 0 6.33-6.32V8.92a8.28 8.28 0 0 0 4.84 1.54V7.02a4.87 4.87 0 0 1-.92-.33Z"/></svg>
-                    </div>
-                    <span class="text-xs font-bold text-white group-hover:text-cyan-400 transition-colors">TikTok</span>
-                    <span class="text-[10px] text-slate-400">@daviriann</span>
-                </a>
-
-                <!-- Kwai -->
-                <a href="https://www.kwai.com/@daviriannnn" target="_blank" rel="noopener" class="p-3 rounded-xl glass-card flex flex-col items-center justify-center text-center group">
-                    <div class="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0">
-                        <i data-lucide="video" class="w-5 h-5"></i>
-                    </div>
-                    <span class="text-xs font-bold text-white group-hover:text-amber-400 transition-colors">Kwai</span>
-                    <span class="text-[10px] text-slate-400">@daviriannnn</span>
-                </a>
-
-                <!-- X (Twitter) -->
-                <a href="https://x.com/DaviRiann" target="_blank" rel="noopener" class="p-3 rounded-xl glass-card flex flex-col items-center justify-center text-center group">
-                    <div class="w-9 h-9 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    </div>
-                    <span class="text-xs font-bold text-white group-hover:text-sky-400 transition-colors">X (Twitter)</span>
-                    <span class="text-[10px] text-slate-400">@DaviRiann</span>
-                </a>
-
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/davi.rian.641954/" target="_blank" rel="noopener" class="p-3 rounded-xl glass-card flex flex-col items-center justify-center text-center group">
-                    <div class="w-9 h-9 rounded-xl bg-indigo-600/10 border border-indigo-600/20 flex items-center justify-center text-indigo-400 mb-1.5 group-hover:scale-110 transition-transform flex-shrink-0">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                    </div>
-                    <span class="text-xs font-bold text-white group-hover:text-indigo-400 transition-colors">Facebook</span>
-                    <span class="text-[10px] text-slate-400">davi.rian</span>
-                </a>
-
-            </div>
-
-            <!-- Perguntas Anônimas (NGL) - Fora do Grid com mt-2.5 -->
-            <a href="https://ngl.link/daviriann" target="_blank" rel="noopener" class="w-full mt-2.5 p-3.5 rounded-xl glass-card flex items-center justify-between group border border-pink-500/30 hover:border-pink-500/60 shadow-lg shadow-pink-500/10">
-                <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-pink-500/20 text-pink-400 border border-pink-500/40 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-                        <i data-lucide="message-circle-question" class="w-5 h-5"></i>
-                    </div>
-                    <div class="text-left min-w-0">
-                        <div class="text-xs sm:text-sm font-bold text-white group-hover:text-pink-400 transition-colors flex items-center gap-1.5 flex-wrap">
-                            <span>Mande uma Mensagem Anônima</span>
-                            <span class="bg-pink-500 text-white text-[9px] px-1.5 py-0.5 rounded font-extrabold uppercase whitespace-nowrap shrink-0">NGL</span>
-                        </div>
-                        <div class="text-[10px] text-slate-400 truncate sm:whitespace-normal">Faça perguntas, confissões ou mande um recado secreto</div>
-                    </div>
-                </div>
-                <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-pink-400 transition-colors flex-shrink-0 ml-2"></i>
-            </a>
-
-            <!-- Spotify Bar -->
-            <a href="https://open.spotify.com/user/31lktxgjusaqtulieglfgxjsajq4" target="_blank" rel="noopener" class="w-full mt-2.5 p-3.5 rounded-xl glass-card flex items-center justify-between group">
-                <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform flex-shrink-0">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.498 17.306c-.215.352-.674.463-1.026.248-2.809-1.716-6.345-2.105-10.509-1.153-.401.092-.799-.158-.891-.559-.092-.401.158-.799.559-.891 4.536-1.037 8.441-.594 11.619 1.348.352.216.463.675.248 1.007zm1.467-3.262c-.27.441-.849.58-1.29.31-3.216-1.977-8.118-2.548-11.921-1.393-.497.151-1.023-.135-1.174-.632-.151-.498.135-1.023.633-1.174 4.347-1.319 9.754-.684 13.442 1.583.441.27.58.849.31 1.306zm.126-3.41c-3.856-2.29-10.218-2.502-13.882-1.39-.59.179-1.218-.16-1.397-.75-.179-.59.16-1.218.75-1.397 4.218-1.28 11.239-1.032 15.654 1.59.531.315.706 1.002.391 1.533-.315.53-.984.723-1.516.414z"/></svg>
-                    </div>
-                    <div class="text-left min-w-0">
-                        <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">Perfil no Spotify</div>
-                        <div class="text-[11px] text-slate-400 truncate sm:whitespace-normal">Playlists favoritas, podcasts & trilhas sonoras</div>
-                    </div>
-                </div>
-                <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
-            </a>
-
-            
-            <!-- Canal Gamer Separado -->
-            <a href="https://davirian-gamer-links.vercel.app" target="_blank" rel="noopener" class="w-full mt-2.5 p-3.5 rounded-xl glass-card flex items-center justify-between group border-l-4 border-l-purple-500">
-                <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform flex-shrink-0">
-                        <i data-lucide="gamepad-2" class="w-5 h-5"></i>
-                    </div>
-                    <div class="text-left min-w-0">
-                        <div class="text-sm font-bold text-white group-hover:text-purple-400 transition-colors">Canal Gamer & Lives (@daviriangamer)</div>
-                        <div class="text-[11px] text-slate-400 truncate sm:whitespace-normal">Hub exclusivo de lives, clipes, Discord e setup</div>
-                    </div>
-                </div>
-                <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
-            </a>
-
-            <!-- Canal de Futebol Separado -->
-            <a href="https://davirian-fut-links.vercel.app" target="_blank" rel="noopener" class="w-full mt-2.5 p-3.5 rounded-xl glass-card flex items-center justify-between group border-l-4 border-l-emerald-500">
-                <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform flex-shrink-0">
-                        <i data-lucide="trophy" class="w-5 h-5"></i>
-                    </div>
-                    <div class="text-left min-w-0">
-                        <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">Canal de Futebol & Freestyle (@davirianfut)</div>
-                        <div class="text-[11px] text-slate-400 truncate sm:whitespace-normal">Hub exclusivo de gols, desafios, podcast e resenha</div>
-                    </div>
-                </div>
-                <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
-            </a>
-
-            <!-- Portal da Comunidade Oficial (Gamer & Futebol) -->
-            <a href="https://comunidade-davirian-fut-e-gamer.vercel.app/" target="_blank" rel="noopener" class="w-full mt-2.5 p-3.5 rounded-xl glass-card flex items-center justify-between group border-l-4 border-l-cyan-400">
-                <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform flex-shrink-0">
-                        <i data-lucide="globe" class="w-5 h-5"></i>
-                    </div>
-                    <div class="text-left min-w-0">
-                        <div class="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors flex items-center gap-1.5 flex-wrap">
-                            <span>Portal da Comunidade Oficial</span>
-                            <span class="bg-cyan-500 text-black text-[9px] px-1.5 py-0.5 rounded-full font-bold whitespace-nowrap shrink-0">Comunidade</span>
-                        </div>
-                        <div class="text-[11px] text-slate-400 truncate sm:whitespace-normal">Hub com galeria de fotos em alta resolução, clipes, tabela e notícias</div>
-                    </div>
-                </div>
-                <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0 ml-2"></i>
-            </a>
-
         </div>
 
         <!-- Botão de Salvar Contato (vCard) -->
-        <button onclick="downloadVCard()" class="w-full py-3 mb-8 rounded-xl bg-dark-card border border-dark-border hover:border-slate-600 text-slate-300 font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+        <button onclick="downloadVCard()" data-track="action_download_vcard" class="btn-card w-full py-3 mb-6 rounded-xl text-slate-300 font-semibold text-xs flex items-center justify-center gap-2">
             <i data-lucide="user-plus" class="w-4 h-4 text-indigo-400"></i>
             <span>Salvar Contato na Agenda (vCard)</span>
         </button>
 
-        <!-- Rodapé -->
-        <footer class="text-center text-slate-500 text-[11px]">
+        <!-- Rodapé com Acesso ao Painel de Cliques -->
+        <footer class="text-center text-slate-500 text-[11px] flex flex-col items-center gap-2">
             <p>© 2026 <strong>Davi Rian</strong> · Salvador, Bahia</p>
-            <p class="mt-1">Engenharia de Software, Automações & Criação de Conteúdo</p>
+            <p>Engenharia de Software, Automações & Criação de Conteúdo</p>
+            <button type="button" id="btn-open-clicks-stats" class="text-[10px] text-indigo-400/80 hover:text-indigo-300 border border-indigo-500/20 hover:border-indigo-500/50 px-3 py-1 rounded-full bg-indigo-500/5 transition-all flex items-center gap-1.5 shadow-sm active:scale-95 mt-1">
+                <i data-lucide="bar-chart-3" class="w-3.5 h-3.5"></i>
+                <span>Ver Cliques dos Links (Painel)</span>
+            </button>
         </footer>
 
     </main>
+
+    <!-- Modal de Estatísticas de Cliques -->
+    <div id="clicks-stats-modal" class="modal-backdrop hidden-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm" role="dialog" aria-modal="true">
+        <div class="w-full max-w-md max-h-[90vh] overflow-y-auto rounded-3xl bg-[#0F131D] border border-indigo-500/40 shadow-2xl p-5 sm:p-6 text-left relative">
+            <button type="button" id="btn-close-clicks-stats" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+                ✕
+            </button>
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-11 h-11 rounded-2xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/40 flex items-center justify-center shrink-0">
+                    <i data-lucide="activity" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h3 class="font-mono text-lg font-bold text-white">Métricas de Cliques Tech</h3>
+                    <p class="text-xs text-slate-400">Contabilização em tempo real</p>
+                </div>
+            </div>
+            <div class="p-3 mb-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-between">
+                <span class="text-xs font-medium text-slate-300">Total de cliques registrados:</span>
+                <span id="total-clicks-counter" class="text-base font-extrabold text-indigo-400">0</span>
+            </div>
+            <div class="space-y-2 mb-5" id="clicks-breakdown-list"></div>
+            <div class="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+                <button type="button" id="btn-reset-clicks" class="text-[11px] text-red-400 hover:text-red-300 py-1.5 px-3 rounded-lg hover:bg-red-500/10 transition-colors">
+                    Zerar Contadores
+                </button>
+                <div class="text-[10px] text-slate-500 text-right">Dados salvos localmente</div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal de QR Code -->
     <div id="qr-modal" style="display: none;" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
@@ -509,7 +403,114 @@
     </div>
 
     <script>
-        lucide.createIcons();
+        // Média real de conexões e dev reach (ajuste facilmente aqui)
+        const AUDIENCE_METRICS = {
+            github: 350,
+            linkedin: 1800,
+            youtube: 850,
+            automacoes: 1800,
+            getTotalFormatted() {
+                const total = this.github + this.linkedin + this.youtube + this.automacoes;
+                return '+' + (total / 1000).toFixed(1).replace('.0', '') + 'K';
+            }
+        };
+
+        const counterEl = document.getElementById('followers-counter');
+        if (counterEl) counterEl.textContent = AUDIENCE_METRICS.getTotalFormatted();
+
+        // -------------------------------------------------------------
+        // Rastreamento e Painel Local de Cliques
+        // -------------------------------------------------------------
+        const CLICKS_STORAGE_KEY = 'davirian_tech_clicks_data';
+        const FRIENDLY_NAMES = {
+            'social_github': 'GitHub Dev (Topo)',
+            'social_youtube': 'YouTube Tech (Topo)',
+            'social_instagram': 'Instagram Pessoal (Topo)',
+            'social_twitter': 'X Twitter Tech (Topo)',
+            'social_whatsapp': 'WhatsApp Comercial (Topo)',
+            'destaque_iniciar_projeto': 'Destaque Iniciar Projeto',
+            'link_davibot_saas': 'Davi Bot SaaS Studio',
+            'link_mega_acervo': 'Mega Acervo Digital VIP',
+            'link_portfolio_tech': 'Portfólio Software House',
+            'link_takeshi_bot': 'Takeshi Bot Engine',
+            'action_download_vcard': 'Download vCard'
+        };
+
+        function getStoredClicks() {
+            try { return JSON.parse(localStorage.getItem(CLICKS_STORAGE_KEY) || '{}'); } catch(e) { return {}; }
+        }
+
+        function recordLocalClick(name) {
+            const data = getStoredClicks();
+            data[name] = (data[name] || 0) + 1;
+            try { localStorage.setItem(CLICKS_STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+        }
+
+        const clicksModal = document.getElementById('clicks-stats-modal');
+        const btnOpenClicksStats = document.getElementById('btn-open-clicks-stats');
+        const btnCloseClicksStats = document.getElementById('btn-close-clicks-stats');
+        const btnResetClicks = document.getElementById('btn-reset-clicks');
+        const clicksListEl = document.getElementById('clicks-breakdown-list');
+        const totalClicksCounter = document.getElementById('total-clicks-counter');
+
+        function renderClicksStats() {
+            const data = getStoredClicks();
+            const keys = Object.keys(data);
+            let total = 0;
+            if (clicksListEl) {
+                if (keys.length === 0) {
+                    clicksListEl.innerHTML = '<div class="text-center py-6 text-slate-500 text-xs">Nenhum clique registrado ainda.</div>';
+                } else {
+                    clicksListEl.innerHTML = '';
+                    keys.sort((a,b) => data[b] - data[a]).forEach(k => {
+                        const count = data[k];
+                        total += count;
+                        const row = document.createElement('div');
+                        row.className = 'flex items-center justify-between p-2.5 rounded-xl bg-white/[0.02] border border-white/5 text-xs';
+                        row.innerHTML = `<span class="text-slate-300 font-medium truncate pr-2">${FRIENDLY_NAMES[k] || k}</span><span class="font-extrabold text-indigo-400 bg-indigo-500/15 px-2 py-0.5 rounded-md text-[11px]">${count}</span>`;
+                        clicksListEl.appendChild(row);
+                    });
+                }
+            }
+            if (totalClicksCounter) totalClicksCounter.textContent = total;
+        }
+
+        function openClicksStats() { renderClicksStats(); if (clicksModal) clicksModal.classList.remove('hidden-modal'); }
+        function closeClicksStats() { if (clicksModal) clicksModal.classList.add('hidden-modal'); }
+
+        if (btnOpenClicksStats) btnOpenClicksStats.addEventListener('click', openClicksStats);
+        if (btnCloseClicksStats) btnCloseClicksStats.addEventListener('click', closeClicksStats);
+        if (btnResetClicks) btnResetClicks.addEventListener('click', () => {
+            if (confirm('Zerar contadores de cliques?')) {
+                localStorage.removeItem(CLICKS_STORAGE_KEY);
+                renderClicksStats();
+            }
+        });
+
+        // Click Listener Global
+        document.addEventListener('click', (e) => {
+            const el = e.target.closest('[data-track]');
+            if (!el) return;
+            const name = el.getAttribute('data-track');
+            recordLocalClick(name);
+
+            const isSocial = name.startsWith('social_');
+            const net = isSocial ? name.replace('social_', '') : null;
+
+            if (typeof window.gtag === 'function') {
+                if (isSocial) window.gtag('event', 'click_social', { network: net, link_name: name });
+                window.gtag('event', 'select_content', { content_type: 'tech_link', item_id: name });
+                window.gtag('event', 'click_link', { link_name: name });
+            }
+            console.log(`[Tech Tracked]: ${name}`);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeClicksStats();
+                closeQrModal();
+            }
+        });
 
         function shareLink() {
             if (navigator.share) {
@@ -524,27 +525,11 @@
             }
         }
 
-        function openQrModal() {
-            document.getElementById('qr-modal').style.display = 'flex';
-        }
-
-        function closeQrModal() {
-            document.getElementById('qr-modal').style.display = 'none';
-        }
+        function openQrModal() { document.getElementById('qr-modal').style.display = 'flex'; }
+        function closeQrModal() { document.getElementById('qr-modal').style.display = 'none'; }
 
         function downloadVCard() {
-            const vcard = `BEGIN:VCARD
-VERSION:3.0
-N:Rian;Davi;;;
-FN:Davi Rian
-ORG:Davi Rian Tech
-TITLE:Software Engineer & Tech Founder
-TEL;TYPE=CELL,VOICE:+557196815876
-EMAIL:contato@davirian.tech
-URL:https://davirian-tech.vercel.app/
-NOTE:Engenheiro Full-Stack, Automações de IA e Criador de Conteúdo
-END:VCARD`;
-
+            const vcard = `BEGIN:VCARD\nVERSION:3.0\nN:Rian;Davi;;;\nFN:Davi Rian\nORG:Davi Rian Tech\nTITLE:Software Engineer & Tech Founder\nTEL;TYPE=CELL,VOICE:+557196815876\nEMAIL:contato@davirian.tech\nURL:https://davirian-tech.vercel.app/\nNOTE:Engenheiro Full-Stack, Automações de IA e Criador de Conteúdo\nEND:VCARD`;
             const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -553,6 +538,8 @@ END:VCARD`;
             link.click();
             document.body.removeChild(link);
         }
+
+        lucide.createIcons();
     </script>
 </body>
 </html>
